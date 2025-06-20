@@ -1,6 +1,5 @@
 /* src/styles/Whiteboard.css */
 
-/* --- NEW: Import Handwriting Font --- */
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap');
 
 .whiteboard-overlay {
@@ -24,10 +23,10 @@
 }
 
 .whiteboard-container {
-  width: 90%;
-  max-width: 800px;
-  height: 85vh;
-  max-height: 700px;
+  width: 95%;
+  max-width: 1200px;
+  height: 90vh;
+  max-height: 800px;
   background-color: #FDFDFD;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -61,6 +60,12 @@
   font-weight: 600;
 }
 
+.whiteboard-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.whiteboard-minimize-btn,
 .whiteboard-close-btn {
   background: none;
   border: none;
@@ -71,130 +76,142 @@
   transition: all 0.2s ease;
 }
 
+.whiteboard-minimize-btn:hover,
 .whiteboard-close-btn:hover {
   background-color: #E0E0E0;
   color: #2D3436;
+}
+
+.whiteboard-minimize-btn:hover {
+  transform: rotate(0deg);
+}
+
+.whiteboard-close-btn:hover {
   transform: rotate(90deg);
 }
 
 .whiteboard-content {
   flex-grow: 1;
-  padding: 2rem;
-  overflow-y: auto;
-  scroll-behavior: smooth;
+  padding: 1rem;
+  overflow: hidden;
   color: #2D3436;
-  /* --- NEW: Apply handwriting font globally within the whiteboard --- */
   font-family: 'Kalam', cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .whiteboard-step {
-  margin-bottom: 2rem; /* Increased spacing for handwriting font */
-  min-height: 1.5em; 
-}
-
-.whiteboard-step h1, .whiteboard-step h2, .whiteboard-step p, .whiteboard-step blockquote {
-  margin-top: 0;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .whiteboard-step h1 {
-  font-size: 2.5rem; /* Larger for handwritten look */
+  font-size: 1.6rem;
   font-weight: 700;
   color: var(--brand-primary);
-  border-bottom: 2px solid var(--brand-secondary);
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
+
 .whiteboard-step h2 {
-  font-size: 1.8rem; /* Larger for handwritten look */
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--brand-accent);
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin: 0.5rem 0;
 }
+
 .whiteboard-step p {
-  font-size: 1.25rem; /* Larger and more readable handwriting */
-  line-height: 1.8;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0.5rem 0;
+  max-width: 800px;
 }
 
 .whiteboard-image {
   max-width: 100%;
+  max-height: 60px;
   height: auto;
-  border-radius: 8px;
+  border-radius: 4px;
   border: 1px solid #DFE6E9;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  margin: 0.25rem 0;
+  object-fit: contain;
 }
 
 .katex-display {
-  font-family: 'KaTeX_Main', serif; /* Override handwriting for formulas */
-  font-size: 1.3em;
-  padding: 1rem;
-  background-color: transparent; /* Cleaner look */
-  border-radius: 8px;
-  text-align: center;
-  overflow-x: auto;
+  font-family: 'KaTeX_Main', serif;
+  font-size: 0.8em;
+  padding: 0.25rem;
+  margin: 0.25rem 0;
 }
 
 .checklist {
   list-style: none;
   padding: 0;
+  text-align: left;
+  width: 100%;
+  max-width: 700px;
 }
+
 .checklist li {
-  padding-left: 2.5rem;
+  padding-left: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
   position: relative;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-  line-height: 1.6;
 }
+
 .checklist li::before {
   content: '✓';
   position: absolute;
   left: 0;
-  top: 4px;
   color: var(--brand-secondary);
   font-weight: bold;
-  font-size: 1.5rem;
 }
 
-
-/* --- NEW: SVG Drawing Animation --- */
 .hand-drawn-svg {
   width: 100%;
+  max-width: 100px;
   height: auto;
+  max-height: 40px;
+  margin: 0.25rem 0;
 }
-.hand-drawn-svg path,
-.hand-drawn-svg line,
-.hand-drawn-svg rect,
-.hand-drawn-svg circle,
-.hand-drawn-svg polyline {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: draw 2s linear forwards;
-}
-
-@keyframes draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
 
 .whiteboard-tray {
-  height: 15px;
+  height: 12px;
   background-color: #C0C0C0;
   border-top: 1px solid #A0A0A0;
-  flex-shrink: 0;
-  margin: 0 1rem 1rem 1rem;
+  margin: 0 1rem 1rem;
   border-radius: 3px;
-  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Animations for NON-TEXT elements --- */
-.animate {
-  animation-duration: 0.7s;
-  animation-fill-mode: both;
-  animation-timing-function: ease-out;
+.whiteboard-minimized {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #6C5CE7;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-@keyframes pop-in { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
-.pop-in { animation-name: pop-in; }
+.whiteboard-minimized svg {
+  width: 20px;
+  height: 20px;
+}
+
+.whiteboard-minimized span {
+  font-size: 0.9rem;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
