@@ -1,5 +1,4 @@
 // src/components/Whiteboard.js
-
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/Whiteboard.css';
 import { whiteboardContent } from '../data/explanationData.js';
@@ -53,7 +52,6 @@ const Whiteboard = ({ topicId, onClose }) => {
   const contentRef = useRef(null);
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
     const timeouts = [];
     setDisplayedSteps([]);
 
@@ -67,7 +65,6 @@ const Whiteboard = ({ topicId, onClose }) => {
     });
     
     return () => {
-      document.body.style.overflow = 'auto';
       timeouts.forEach(clearTimeout);
     };
   }, [topicId]);
@@ -86,12 +83,6 @@ const Whiteboard = ({ topicId, onClose }) => {
     setIsMinimized(false);
   };
 
-  const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) {
-      handleMinimize();
-    }
-  };
-
   if (isMinimized) {
     return (
       <div className="whiteboard-minimized" onClick={handleMaximize}>
@@ -107,30 +98,28 @@ const Whiteboard = ({ topicId, onClose }) => {
   }
 
   return (
-    <div className="whiteboard-overlay" onClick={handleOverlayClick}>
-      <div className="whiteboard-container" onClick={(e) => e.stopPropagation()}>
-        <header className="whiteboard-header">
-          <h3 style={{fontFamily: 'Inter, sans-serif'}}>{topicData.title}</h3>
-          <div className="whiteboard-controls">
-            <button className="whiteboard-minimize-btn" onClick={handleMinimize} title="Minimize">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M20 14H4v-4h16v4z"/>
-              </svg>
-            </button>
-            <button className="whiteboard-close-btn" onClick={onClose} title="Close Explanation">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor" d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7L10.6 12L5.7 7.1q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275L12 10.6l4.9-4.9q.275-.275.7-.275t.7.275q.275.275.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7q-.275.275-.7.275t-.7-.275z"/>
-              </svg>
-            </button>
-          </div>
-        </header>
-        <div className="whiteboard-content" ref={contentRef}>
-          {displayedSteps.map((step, index) => (
-            <WhiteboardStep key={index} step={step} />
-          ))}
+    <div className="whiteboard-container">
+      <header className="whiteboard-header">
+        <h3 style={{fontFamily: 'Inter, sans-serif'}}>{topicData.title}</h3>
+        <div className="whiteboard-controls">
+          <button className="whiteboard-minimize-btn" onClick={handleMinimize} title="Minimize">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M20 14H4v-4h16v4z"/>
+            </svg>
+          </button>
+          <button className="whiteboard-close-btn" onClick={onClose} title="Close Explanation">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="currentColor" d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7L10.6 12L5.7 7.1q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275L12 10.6l4.9-4.9q.275-.275.7-.275t.7.275q.275.275.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7q-.275.275-.7.275t-.7-.275z"/>
+            </svg>
+          </button>
         </div>
-        <div className="whiteboard-tray"></div>
+      </header>
+      <div className="whiteboard-content" ref={contentRef}>
+        {displayedSteps.map((step, index) => (
+          <WhiteboardStep key={index} step={step} />
+        ))}
       </div>
+      <div className="whiteboard-tray"></div>
     </div>
   );
 };

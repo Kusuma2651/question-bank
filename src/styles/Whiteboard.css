@@ -1,26 +1,5 @@
 /* src/styles/Whiteboard.css */
-
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap');
-
-.whiteboard-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(9, 30, 66, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(5px);
-  animation: overlay-fade-in 0.3s ease-out;
-}
-
-@keyframes overlay-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
 
 .whiteboard-container {
   width: 95%;
@@ -34,13 +13,17 @@
   flex-direction: column;
   overflow: hidden;
   border: 8px solid #E0E0E0;
-  position: relative;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
   animation: board-slide-up 0.4s ease-out;
 }
 
 @keyframes board-slide-up {
-  from { transform: translateY(50px) scale(0.95); opacity: 0; }
-  to { transform: translateY(0) scale(1); opacity: 1; }
+  from { transform: translate(-50%, calc(-50% + 50px)) scale(0.95); opacity: 0; }
+  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
 
 .whiteboard-header {
@@ -93,7 +76,7 @@
 .whiteboard-content {
   flex-grow: 1;
   padding: 1rem;
-  overflow: hidden;
+  overflow-y: auto;
   color: #2D3436;
   font-family: 'Kalam', cursive;
   display: flex;

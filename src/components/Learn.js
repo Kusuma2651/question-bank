@@ -346,6 +346,7 @@ const Learn = () => {
   const handleTopicSelect = (topicId) => {
     if (pageState === 'quizActive') return;
   
+    // Always show whiteboard if content exists
     if (whiteboardContent[topicId]) {
       const topicName = masterTopicData[topicId]?.name || 'this topic';
       setMessages(prev => [
@@ -353,13 +354,14 @@ const Learn = () => {
       ]);
       setWhiteboardTopicId(topicId);
       setIsWhiteboardVisible(true);
+    }
+    
+    // Always start the quiz if available
+    if (masterTopicData[topicId]?.questions.length > 0) {
+      startQuiz(topicId);
     } else {
-      // This is now a true fallback, as all topics should have whiteboard content.
-      const topicName = masterTopicData[topicId].name;
-    setMessages(prev => [
-        ...prev, { id: Date.now(), sender: 'ai', text: `Great choice! Let's start with a quiz on "${topicName}".`, hasTTS: true }
-    ]);
-    startQuiz(topicId);
+      // If no quiz available, ensure we're in topicsReady state
+      setPageState('topicsReady');
     }
   };
   
@@ -516,7 +518,7 @@ const Learn = () => {
             topicId={whiteboardTopicId}
             onClose={handleCloseWhiteboard}
         />
-    )}
+      )}
 
     </div>
   );
