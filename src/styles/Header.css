@@ -1,0 +1,68 @@
+/* src/components/Header/Header.css */
+/* --- MODIFIED & REFINED --- */
+
+.main-header {
+  padding: 1rem 0;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 0.75rem;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-text span {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--foreground);
+  line-height: 1.2;
+}
+
+.logo-text small {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  font-weight: 500;
+}
+
+.signup-button {
+  background-color: var(--brand-purple);
+  color: #FFFFFF;
+  border: none;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.signup-button:hover {
+  background-color: var(--brand-purple-dark);
+  transform: translateY(-2px);
+}

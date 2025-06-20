@@ -1,0 +1,116 @@
+/* src/components/HeroSection/HeroSection.css */
+/* --- FINAL REVISION --- */
+
+.hero-section {
+  padding: 5rem 2rem 6rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-content {
+  max-width: 850px;
+  margin-bottom: 4rem;
+}
+
+.ai-badge {
+  display: inline-block;
+  border: 1px solid var(--border);
+  background-color: #F8FAFC;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  color: var(--brand-purple);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-content h1 {
+  font-size: 3.75rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  color: var(--foreground);
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  font-size: 1.125rem;
+  color: var(--muted-foreground);
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.hero-features-card {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start; /* Aligns items to the top */
+  gap: 1.5rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 950px;
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-features-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1), var(--shadow-glow);
+}
+
+/* --- THE KEY LAYOUT CHANGE --- */
+.hero-feature-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column; /* This creates the vertical stack */
+  align-items: center;    /* This centers the items horizontally */
+  text-align: center;     /* This centers the text */
+}
+
+.hero-icon-wrapper {
+  flex-shrink: 0;
+  width: 64px;  /* Larger icon wrapper */
+  height: 64px;
+  border-radius: 1rem; /* More rounded */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem; /* Space between icon and text */
+  transition: transform 0.3s ease;
+}
+
+.hero-feature-item:hover .hero-icon-wrapper {
+  transform: scale(1.1); /* Nice hover effect for the icon */
+}
+
+/* Applying the EXACT pastel background colors from the new variables */
+.hero-icon-wrapper.blue { background-color: var(--hero-icon-bg-blue); }
+.hero-icon-wrapper.magenta { background-color: var(--hero-icon-bg-magenta); }
+.hero-icon-wrapper.teal { background-color: var(--hero-icon-bg-teal); }
+
+/* Applying the EXACT vibrant icon colors from the new variables */
+.hero-icon-wrapper .MuiSvgIcon-root {
+  font-size: 2.25rem !important; /* Larger icon size */
+}
+.hero-icon-wrapper.blue .MuiSvgIcon-root { color: var(--hero-icon-color-blue); }
+.hero-icon-wrapper.magenta .MuiSvgIcon-root { color: var(--hero-icon-color-magenta); }
+.hero-icon-wrapper.teal .MuiSvgIcon-root { color: var(--hero-icon-color-teal); }
+
+.hero-feature-item h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--foreground);
+}
+
+.hero-feature-item p {
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+  max-width: 200px; /* Prevents text from becoming too wide */
+}

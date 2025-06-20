@@ -1,0 +1,200 @@
+/* src/styles/Whiteboard.css */
+
+/* --- NEW: Import Handwriting Font --- */
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap');
+
+.whiteboard-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(9, 30, 66, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  animation: overlay-fade-in 0.3s ease-out;
+}
+
+@keyframes overlay-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.whiteboard-container {
+  width: 90%;
+  max-width: 800px;
+  height: 85vh;
+  max-height: 700px;
+  background-color: #FDFDFD;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 8px solid #E0E0E0;
+  position: relative;
+  animation: board-slide-up 0.4s ease-out;
+}
+
+@keyframes board-slide-up {
+  from { transform: translateY(50px) scale(0.95); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.whiteboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: #F0F0F0;
+  border-bottom: 2px solid #D1D1D1;
+  flex-shrink: 0;
+}
+
+.whiteboard-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.whiteboard-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  color: #636E72;
+  transition: all 0.2s ease;
+}
+
+.whiteboard-close-btn:hover {
+  background-color: #E0E0E0;
+  color: #2D3436;
+  transform: rotate(90deg);
+}
+
+.whiteboard-content {
+  flex-grow: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  color: #2D3436;
+  /* --- NEW: Apply handwriting font globally within the whiteboard --- */
+  font-family: 'Kalam', cursive;
+}
+
+.whiteboard-step {
+  margin-bottom: 2rem; /* Increased spacing for handwriting font */
+  min-height: 1.5em; 
+}
+
+.whiteboard-step h1, .whiteboard-step h2, .whiteboard-step p, .whiteboard-step blockquote {
+  margin-top: 0;
+}
+
+.whiteboard-step h1 {
+  font-size: 2.5rem; /* Larger for handwritten look */
+  font-weight: 700;
+  color: var(--brand-primary);
+  border-bottom: 2px solid var(--brand-secondary);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+.whiteboard-step h2 {
+  font-size: 1.8rem; /* Larger for handwritten look */
+  font-weight: 700;
+  color: var(--brand-accent);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+.whiteboard-step p {
+  font-size: 1.25rem; /* Larger and more readable handwriting */
+  line-height: 1.8;
+}
+
+.whiteboard-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #DFE6E9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+}
+
+.katex-display {
+  font-family: 'KaTeX_Main', serif; /* Override handwriting for formulas */
+  font-size: 1.3em;
+  padding: 1rem;
+  background-color: transparent; /* Cleaner look */
+  border-radius: 8px;
+  text-align: center;
+  overflow-x: auto;
+}
+
+.checklist {
+  list-style: none;
+  padding: 0;
+}
+.checklist li {
+  padding-left: 2.5rem;
+  position: relative;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+.checklist li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  color: var(--brand-secondary);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+
+/* --- NEW: SVG Drawing Animation --- */
+.hand-drawn-svg {
+  width: 100%;
+  height: auto;
+}
+.hand-drawn-svg path,
+.hand-drawn-svg line,
+.hand-drawn-svg rect,
+.hand-drawn-svg circle,
+.hand-drawn-svg polyline {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw 2s linear forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+.whiteboard-tray {
+  height: 15px;
+  background-color: #C0C0C0;
+  border-top: 1px solid #A0A0A0;
+  flex-shrink: 0;
+  margin: 0 1rem 1rem 1rem;
+  border-radius: 3px;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Animations for NON-TEXT elements --- */
+.animate {
+  animation-duration: 0.7s;
+  animation-fill-mode: both;
+  animation-timing-function: ease-out;
+}
+
+@keyframes pop-in { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+.pop-in { animation-name: pop-in; }

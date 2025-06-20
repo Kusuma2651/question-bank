@@ -1,0 +1,80 @@
+/* src/components/Modal/RedirectModal.css */
+.redirect-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    animation: modal-fade-in 0.3s ease forwards;
+  }
+  
+  @keyframes modal-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .redirect-modal-content {
+    background-color: var(--card);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    transform: scale(0.95);
+    animation: modal-scale-in 0.3s ease forwards;
+  }
+  
+  @keyframes modal-scale-in {
+    from { transform: scale(0.95); }
+    to { transform: scale(1); }
+  }
+  
+  .redirect-modal-icon {
+    width: 64px;
+    height: 64px;
+    background-color: #D1FAE5;
+    color: #059669;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 1.5rem auto;
+  }
+  
+  .redirect-modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--foreground);
+    margin-bottom: 0.5rem;
+  }
+  
+  .redirect-modal-text {
+    color: var(--muted-foreground);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+  
+  .redirect-modal-cancel-btn {
+    width: 100%;
+    background-color: var(--card);
+    color: var(--muted-foreground);
+    border: 1px solid var(--border);
+    padding: 0.75rem;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  
+  .redirect-modal-cancel-btn:hover {
+    background-color: #F8FAFC;
+    border-color: #CBD5E1;
+  }

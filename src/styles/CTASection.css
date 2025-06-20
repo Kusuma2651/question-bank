@@ -1,0 +1,49 @@
+/* src/components/CTASection/CTASection.css */
+/* --- MODIFIED & REFINED --- */
+
+.cta-section {
+  padding: 6rem 2rem;
+  background-color: var(--background);
+}
+
+.cta-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5rem 3rem;
+  border-radius: 1.5rem; /* More rounded corners */
+  background: var(--cta-gradient); /* The correct gradient */
+  color: #FFFFFF;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.cta-container h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.cta-container p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+  opacity: 0.9;
+}
+
+.cta-button {
+  background-color: #FFFFFF;
+  color: var(--brand-purple);
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.cta-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}

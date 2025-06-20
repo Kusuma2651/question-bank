@@ -1,0 +1,5 @@
+.landing-page main {
+    /* This ensures content is centered within the viewport */
+    max-width: 1440px; /* Optional: Sets a max-width for very large screens */
+    margin: 0 auto;
+  }
