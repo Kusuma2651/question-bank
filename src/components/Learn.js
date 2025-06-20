@@ -163,6 +163,7 @@ const quizDataByTopic = {
       }
     ]
   },
+  // *** THIS IS THE NEWLY ADDED/CORRECTED ENTRY ***
   biology_cell: {
     name: "Biology: The Animal Cell",
     keywords: ['biology', 'cell', 'organelle'],
@@ -179,7 +180,7 @@ const quizDataByTopic = {
 
 
 // --- COMBINE ALL AVAILABLE TOPICS FROM QUIZZES AND WHITEBOARD DATA ---
-// This logic no longer needs to add missing topics, but it ensures all data is unified.
+// This logic ensures all data is unified.
 const masterTopicData = { ...quizDataByTopic };
 Object.keys(whiteboardContent).forEach(key => {
     if (!masterTopicData[key]) {
@@ -276,7 +277,6 @@ const Learn = () => {
   const handleTopicSelect = (topicId) => {
     if (pageState === 'quizActive') return;
   
-    // Now, every topic should have whiteboard content.
     if (whiteboardContent[topicId]) {
       const topicName = masterTopicData[topicId]?.name || 'this topic';
       setMessages(prev => [
@@ -285,7 +285,7 @@ const Learn = () => {
       setWhiteboardTopicId(topicId);
       setIsWhiteboardVisible(true);
     } else {
-      // This case should ideally not be hit anymore, but is kept as a fallback.
+      // This is now a true fallback, as all topics should have whiteboard content.
       const topicName = masterTopicData[topicId].name;
        setMessages(prev => [
         ...prev, { id: Date.now(), sender: 'ai', text: `Great choice! Let's start with a quiz on "${topicName}".`, hasTTS: true }
@@ -296,7 +296,6 @@ const Learn = () => {
   
   const handleCloseWhiteboard = () => {
     setIsWhiteboardVisible(false);
-    // After closing the explanation, start the quiz for the topic.
     if (whiteboardTopicId && masterTopicData[whiteboardTopicId]?.questions.length > 0) {
       const topicName = masterTopicData[whiteboardTopicId].name;
        setMessages(prev => [

@@ -2,7 +2,7 @@
 
 // FINAL, COMPREHENSIVE VERSION
 // This data file now contains a unique, animated whiteboard explanation for EVERY topic in the application.
-// Diagrams use SVG for the "live drawing" effect or high-quality images.
+// The missing "biology_cell" entry has been added.
 
 export const whiteboardContent = {
     // --- CALCULUS TOPICS ---
@@ -155,7 +155,7 @@ export const whiteboardContent = {
       ]
     },
     polity_preamble: {
-      name: 'Polity: Preamble of Constitution',
+      name: 'Polity: Preamble',
       keywords: ['polity', 'preamble', 'constitution'],
       title: 'Polity: The Preamble',
       steps: [
@@ -167,7 +167,7 @@ export const whiteboardContent = {
       ]
     },
     economy_inflation: {
-      name: 'Economy: Types of Inflation',
+      name: 'Economy: Inflation',
       keywords: ['economy', 'inflation'],
       title: 'Economy: Inflation',
       steps: [
@@ -188,6 +188,19 @@ export const whiteboardContent = {
           { type: 'image', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Ramsar_Sites_in_India_map.svg/500px-Ramsar_Sites_in_India_map.svg.png', alt: 'Map of Ramsar sites in India', delay: 1500, animation: 'pop-in' },
           { type: 'sub-heading', content: 'What is a Wetland?', delay: 1500 },
           { type: 'text', content: "An area of land saturated with water, like a marsh, lake, or mangrove.", delay: 2000 },
+      ]
+    },
+    // *** THIS IS THE NEWLY ADDED/CORRECTED ENTRY ***
+    biology_cell: {
+      name: "Biology: The Animal Cell",
+      keywords: ['biology', 'cell', 'organelle'],
+      title: 'Biology: The Animal Cell',
+      steps: [
+        { type: 'heading', content: 'The Animal Cell', delay: 500 },
+        { type: 'text', content: "The cell is the basic building block of life. Here are its key parts, called organelles.", delay: 1500 },
+        { type: 'image', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Animal_cell_structure_en.svg/450px-Animal_cell_structure_en.svg.png', alt: 'Diagram of an animal cell', delay: 1000, animation: 'pop-in' },
+        { type: 'sub-heading', content: 'Important Organelles', delay: 1000 },
+        { type: 'list', items: ["Nucleus: The cell's 'brain'.", "Mitochondrion: The 'powerhouse'.", "Ribosome: Makes proteins."], delay: 2000 },
       ]
     },
   };
