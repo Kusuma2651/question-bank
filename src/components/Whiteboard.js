@@ -13,11 +13,11 @@ const WhiteboardStep = ({ step }) => {
   const renderContent = () => {
     switch (type) {
       case 'heading':
-        return <TypeAnimation sequence={[content]} speed={60} wrapper="h1" cursor={false} />;
+        return <TypeAnimation sequence={[content]} speed={10} wrapper="h1" cursor={false} />;
       case 'sub-heading':
-        return <TypeAnimation sequence={[content]} speed={70} wrapper="h2" cursor={false} />;
+        return <TypeAnimation sequence={[content]} speed={10} wrapper="h2" cursor={false} />;
       case 'text':
-        return <TypeAnimation sequence={[content]} speed={80} wrapper="p" cursor={false} />;
+        return <TypeAnimation sequence={[content]} speed={10} wrapper="p" cursor={false} />;
       case 'list':
         return (
           <ul className="checklist">
