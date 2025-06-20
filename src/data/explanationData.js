@@ -2,7 +2,7 @@
 
 // FINAL, COMPREHENSIVE VERSION
 // This data file now contains a unique, animated whiteboard explanation for EVERY topic in the application.
-// The missing "biology_cell" entry has been added.
+// New modules for Physics, Chemistry, English, Hindi, and Telugu have been added.
 
 export const whiteboardContent = {
     // --- CALCULUS TOPICS ---
@@ -190,7 +190,6 @@ export const whiteboardContent = {
           { type: 'text', content: "An area of land saturated with water, like a marsh, lake, or mangrove.", delay: 2000 },
       ]
     },
-    // *** THIS IS THE NEWLY ADDED/CORRECTED ENTRY ***
     biology_cell: {
       name: "Biology: The Animal Cell",
       keywords: ['biology', 'cell', 'organelle'],
@@ -201,6 +200,62 @@ export const whiteboardContent = {
         { type: 'image', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Animal_cell_structure_en.svg/450px-Animal_cell_structure_en.svg.png', alt: 'Diagram of an animal cell', delay: 1000, animation: 'pop-in' },
         { type: 'sub-heading', content: 'Important Organelles', delay: 1000 },
         { type: 'list', items: ["Nucleus: The cell's 'brain'.", "Mitochondrion: The 'powerhouse'.", "Ribosome: Makes proteins."], delay: 2000 },
+      ]
+    },
+    
+    // *** NEWLY ADDED MODULES ***
+    physics_newtons_laws: {
+      name: 'Physics: Newton\'s Laws',
+      keywords: ['physics', 'newton', 'force', 'mass'],
+      title: 'Physics: Newton\'s Second Law',
+      steps: [
+        { type: 'heading', content: 'Newton\'s Second Law', delay: 500 },
+        { type: 'text', content: "This law states that the acceleration of an object is directly proportional to the net force acting upon it and inversely proportional to its mass.", delay: 2000 },
+        { type: 'svg', content: `<svg viewBox="0 0 150 100" xmlns="http://www.w3.org/2000/svg"><rect x="40" y="50" width="60" height="30" stroke="#2d3436" stroke-width="2" fill="#dfe6e9" /><path d="M 100 65 L 140 65" stroke="#e74c3c" stroke-width="2" fill="none" marker-end="url(#arrow-red)" /><text x="115" y="60" font-family="Kalam" font-size="12">F</text><text x="65" y="70" font-family="Kalam" font-size="12">m</text><line x1="10" y1="80" x2="140" y2="80" stroke="#2d3436" stroke-width="1.5" /><defs><marker id="arrow-red" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e74c3c" /></marker></defs></svg>`, delay: 1500 },
+        { type: 'sub-heading', content: 'The Famous Formula', delay: 1500 },
+        { type: 'formula', content: 'F = ma', delay: 2000, animation: 'pop-in' },
+      ]
+    },
+    chemistry_benzene_ring: {
+      name: 'Chemistry: Benzene',
+      keywords: ['chemistry', 'benzene', 'aromatic'],
+      title: 'Chemistry: The Benzene Ring',
+      steps: [
+        { type: 'heading', content: 'Benzene (C₆H₆)', delay: 500 },
+        { type: 'text', content: "An aromatic organic compound. Its carbon atoms are joined in a ring with alternating double bonds.", delay: 2000 },
+        { type: 'svg', content: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><polygon points="50,10 93,35 93,85 50,110 7,85 7,35" stroke="#2d3436" stroke-width="2" fill="none" /><circle cx="50" cy="60" r="25" stroke="#2d3436" stroke-width="1.5" stroke-dasharray="4 4" fill="none" /></svg>`, delay: 1500 },
+        { type: 'sub-heading', content: 'Key Feature: Delocalization', delay: 1500 },
+        { type: 'text', content: "The electrons are not fixed between carbons, but are spread out over the whole ring, making it very stable. This is shown by the circle.", delay: 2000 },
+      ]
+    },
+    language_english: {
+      name: 'English: Parts of Speech',
+      keywords: ['english', 'grammar', 'noun', 'verb'],
+      title: 'English: Parts of Speech',
+      steps: [
+        { type: 'heading', content: 'Parts of Speech', delay: 500 },
+        { type: 'text', content: "These are the basic categories of words according to their function in a sentence.", delay: 2000 },
+        { type: 'list', items: ["Noun: A person, place, or thing. (e.g., student, school)", "Verb: An action or state. (e.g., learn, is)", "Adjective: Describes a noun. (e.g., intelligent, blue)"], delay: 2000 },
+      ]
+    },
+    language_hindi: {
+      name: 'Hindi: Basic Greetings',
+      keywords: ['hindi', 'namaste'],
+      title: 'Hindi: Basic Greetings',
+      steps: [
+        { type: 'heading', content: 'हिन्दी अभिवादन', delay: 500 },
+        { type: 'text', content: "Let's learn some simple greetings in Hindi.", delay: 1500 },
+        { type: 'list', items: ["नमस्ते (Namaste) - Hello", "आप कैसे हैं? (Aap kaise hain?) - How are you?", "धन्यवाद (Dhanyavaad) - Thank you"], delay: 2000 },
+      ]
+    },
+    language_telugu: {
+      name: 'Telugu: Basic Greetings',
+      keywords: ['telugu', 'namaskaram'],
+      title: 'Telugu: Basic Greetings',
+      steps: [
+        { type: 'heading', content: 'తెలుగు పరిచయం', delay: 500 },
+        { type: 'text', content: "Let's learn some simple greetings in Telugu.", delay: 1500 },
+        { type: 'list', items: ["నమస్కారం (Namaskāram) - Hello", "ఎలా ఉన్నారు? (Elā unnāru?) - How are you?", "ధన్యవాదాలు (Dhan’yavādālu) - Thank you"], delay: 2000 },
       ]
     },
   };
