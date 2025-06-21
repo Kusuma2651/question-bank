@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/SignUp.css';
 
-const SignUp = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
-    password: '',
-    confirmPassword: ''
+    password: ''
   });
   const [errors, setErrors] = useState({});
+  const [loginError, setLoginError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,10 +22,6 @@ const SignUp = () => {
   const validateForm = () => {
     const newErrors = {};
     
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-    
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
@@ -35,12 +30,6 @@ const SignUp = () => {
     
     if (!formData.password) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-    }
-    
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
     }
     
     setErrors(newErrors);
@@ -49,15 +38,24 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoginError('');
+    
     if (validateForm()) {
-      // In a real app, you would handle signup API call here
-      console.log('Signup form submitted:', formData);
-      // Store user data in localStorage (simulating auth)
-      localStorage.setItem('user', JSON.stringify({
-        name: formData.name,
-        email: formData.email
-      }));
-      navigate('/dashboard');
+      // In a real app, you would handle login API call here
+      // For demo, we'll check localStorage for registered user
+      const userData = localStorage.getItem('user');
+      
+      if (userData) {
+        const user = JSON.parse(userData);
+        if (user.email === formData.email) {
+          // Successful login
+          navigate('/dashboard');
+          return;
+        }
+      }
+      
+      // If we get here, login failed
+      setLoginError('Invalid email or password');
     }
   };
 
@@ -71,22 +69,10 @@ const SignUp = () => {
             <small>AI-powered Learning Platform</small>
           </div>
         </div>
-        <h2 className="signup-title">Create Account</h2>
-        <p className="signup-subtitle">Get started with your account today</p>
+        <h2 className="signup-title">Welcome Back</h2>
+        <p className="signup-subtitle">Log in to continue your learning journey</p>
+        {loginError && <div className="login-error">{loginError}</div>}
         <form className="signup-form" onSubmit={handleSubmit}>
-          <div className="signup-input-group">
-            <label htmlFor="name">Full Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="John Doe"
-              className={errors.name ? 'error' : ''}
-            />
-            {errors.name && <span className="error-message">{errors.name}</span>}
-          </div>
           <div className="signup-input-group">
             <label htmlFor="email">Email Address</label>
             <input
@@ -113,24 +99,11 @@ const SignUp = () => {
             />
             {errors.password && <span className="error-message">{errors.password}</span>}
           </div>
-          <div className="signup-input-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="••••••••"
-              className={errors.confirmPassword ? 'error' : ''}
-            />
-            {errors.confirmPassword && <span className="error-message">{errors.confirmPassword}</span>}
-          </div>
           <button type="submit" className="signup-submit-button">
-            Sign Up
+            Log In
           </button>
           <p className="auth-switch">
-            Already have an account? <span onClick={() => navigate('/login')}>Log in</span>
+            Don't have an account? <span onClick={() => navigate('/signup')}>Sign up</span>
           </p>
         </form>
       </div>
@@ -138,4 +111,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;

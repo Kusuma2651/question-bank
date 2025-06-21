@@ -363,3 +363,11 @@
   box-shadow: 0 6px 20px -5px rgb(124 58 237 / 0.5);
 }
 
+.dashboard-tab.logout-tab {
+  color: #EF4444;
+}
+
+.dashboard-tab.logout-tab:hover {
+  background-color: #FEE2E2;
+  color: #DC2626;
+}

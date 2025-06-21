@@ -4,6 +4,7 @@ import LandingPage from './components/LandingPage'; // Assuming this component e
 import Header from './components/Header';
 // Corrected import paths to point to the actual component files
 import SignUp from './components/SignUp';
+import Login from './components/Login'
 import Dashboard from './components/Dashboard';
 import Learn from './components/Learn';
 import 'katex/dist/katex.min.css'; // Add this line for math rendering
@@ -30,6 +31,7 @@ function App() {
       <Routes>
         <Route path="/" element={<EffectiveLandingPage />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
         
         {/*
           Both /dashboard and /upload now correctly point to the Dashboard component.
