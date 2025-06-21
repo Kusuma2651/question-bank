@@ -6,6 +6,51 @@ import { whiteboardContent } from '../data/explanationData.js';
 import { TypeAnimation } from 'react-type-animation';
 import { BlockMath } from 'react-katex';
 
+const AnimatedList = ({ items, shouldAnimate, onComplete }) => {
+  const [currentItemIndex, setCurrentItemIndex] = useState(0);
+
+  const handleItemAnimationComplete = () => {
+    if (currentItemIndex < items.length - 1) {
+      setCurrentItemIndex(prevIndex => prevIndex + 1);
+    } else {
+      if (onComplete) {
+        onComplete();
+      }
+    }
+  };
+
+  if (!shouldAnimate) {
+    return (
+      <ul className="checklist" style={{ whiteSpace: 'pre-line' }}>
+        {items.map((item, i) => (
+          <li key={i}>
+            <span style={{ whiteSpace: 'pre-line' }}>{item}</span>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
+  return (
+    <ul className="checklist" style={{ whiteSpace: 'pre-line' }}>
+      {items.slice(0, currentItemIndex).map((item, i) => (
+         <li key={i}><span style={{ whiteSpace: 'pre-line' }}>{item}</span></li>
+      ))}
+      {items.length > 0 && currentItemIndex < items.length && (
+        <li key={currentItemIndex}>
+           <TypeAnimation
+              sequence={[items[currentItemIndex], handleItemAnimationComplete]}
+              speed={50}
+              wrapper="span"
+              cursor={false}
+              style={{ whiteSpace: 'pre-line' }}
+            />
+        </li>
+      )}
+    </ul>
+  );
+};
+
 const WhiteboardStep = ({ step, shouldAnimate, onComplete }) => {
   const { type, content, src, alt, animation, items } = step;
   const [isComplete, setIsComplete] = useState(false);
@@ -70,23 +115,11 @@ const WhiteboardStep = ({ step, shouldAnimate, onComplete }) => {
         );
       case 'list':
         return (
-          <ul className="checklist" style={{ whiteSpace: 'pre-line' }}>
-            {items.map((item, i) => (
-              <li key={i}>
-                {shouldAnimate ? (
-                  <TypeAnimation 
-                    sequence={[item, () => i === items.length - 1 && handleAnimationComplete()]} 
-                    speed={50} 
-                    wrapper="span" 
-                    cursor={false}
-                    style={{ whiteSpace: 'pre-line' }}
-                  />
-                ) : (
-                  <span style={{ whiteSpace: 'pre-line' }}>{item}</span>
-                )}
-              </li>
-            ))}
-          </ul>
+          <AnimatedList 
+            items={items} 
+            shouldAnimate={shouldAnimate} 
+            onComplete={handleAnimationComplete} 
+          />
         );
       case 'svg':
         return <div className="hand-drawn-svg" dangerouslySetInnerHTML={{ __html: content }} />;
@@ -151,7 +184,10 @@ const Whiteboard = ({ topicId, onClose }) => {
 
   const handleMaximize = () => {
     setIsMinimized(false);
-    setIsAnimating(currentStepIndex >= displayedSteps.length - 1);
+    if (currentStepIndex === topicData.steps.length - 1 && !isAnimating) {
+      return;
+    }
+    setIsAnimating(true);
   };
 
   if (isMinimized) {
