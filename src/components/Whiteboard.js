@@ -6,23 +6,84 @@ import { whiteboardContent } from '../data/explanationData.js';
 import { TypeAnimation } from 'react-type-animation';
 import { BlockMath } from 'react-katex';
 
-const WhiteboardStep = ({ step }) => {
+const WhiteboardStep = ({ step, shouldAnimate, onComplete }) => {
   const { type, content, src, alt, animation, items } = step;
+  const [isComplete, setIsComplete] = useState(false);
+
+  useEffect(() => {
+    if (!shouldAnimate) {
+      setIsComplete(true);
+    }
+  }, [shouldAnimate]);
+
+  const handleAnimationComplete = () => {
+    setIsComplete(true);
+    if (onComplete) onComplete();
+  };
+
+  useEffect(() => {
+    if (shouldAnimate && onComplete && ['svg', 'formula', 'image'].includes(type)) {
+      const timer = setTimeout(() => {
+        handleAnimationComplete();
+      }, step.delay || 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [shouldAnimate, onComplete, type, step]);
 
   const renderContent = () => {
     switch (type) {
       case 'heading':
-        return <TypeAnimation sequence={[content]} speed={10} wrapper="h1" cursor={false} />;
+        return shouldAnimate ? (
+          <TypeAnimation 
+            sequence={[content, handleAnimationComplete]} 
+            speed={30} 
+            wrapper="h1" 
+            cursor={false}
+            style={{ whiteSpace: 'pre-line' }}
+          />
+        ) : (
+          <h1 style={{ whiteSpace: 'pre-line' }}>{content}</h1>
+        );
       case 'sub-heading':
-        return <TypeAnimation sequence={[content]} speed={10} wrapper="h2" cursor={false} />;
+        return shouldAnimate ? (
+          <TypeAnimation 
+            sequence={[content, handleAnimationComplete]} 
+            speed={30} 
+            wrapper="h2" 
+            cursor={false}
+            style={{ whiteSpace: 'pre-line' }}
+          />
+        ) : (
+          <h2 style={{ whiteSpace: 'pre-line' }}>{content}</h2>
+        );
       case 'text':
-        return <TypeAnimation sequence={[content]} speed={10} wrapper="p" cursor={false} />;
+        return shouldAnimate ? (
+          <TypeAnimation 
+            sequence={[content, handleAnimationComplete]} 
+            speed={30} 
+            wrapper="p" 
+            cursor={false}
+            style={{ whiteSpace: 'pre-line' }}
+          />
+        ) : (
+          <p style={{ whiteSpace: 'pre-line' }}>{content}</p>
+        );
       case 'list':
         return (
-          <ul className="checklist">
+          <ul className="checklist" style={{ whiteSpace: 'pre-line' }}>
             {items.map((item, i) => (
               <li key={i}>
-                <TypeAnimation sequence={[item]} speed={80} wrapper="span" cursor={false} />
+                {shouldAnimate ? (
+                  <TypeAnimation 
+                    sequence={[item, () => i === items.length - 1 && handleAnimationComplete()]} 
+                    speed={50} 
+                    wrapper="span" 
+                    cursor={false}
+                    style={{ whiteSpace: 'pre-line' }}
+                  />
+                ) : (
+                  <span style={{ whiteSpace: 'pre-line' }}>{item}</span>
+                )}
               </li>
             ))}
           </ul>
@@ -39,7 +100,7 @@ const WhiteboardStep = ({ step }) => {
   };
 
   return (
-    <div className={`whiteboard-step ${animation || ''}`}>
+    <div className={`whiteboard-step ${animation || ''} ${isComplete ? 'complete' : ''}`}>
       {renderContent()}
     </div>
   );
@@ -47,27 +108,36 @@ const WhiteboardStep = ({ step }) => {
 
 const Whiteboard = ({ topicId, onClose }) => {
   const [displayedSteps, setDisplayedSteps] = useState([]);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isMinimized, setIsMinimized] = useState(false);
-  const topicData = whiteboardContent[topicId] || { title: 'Not Found', steps: [{ type: 'text', content: 'Content for this topic could not be found.' }] };
+  const [isAnimating, setIsAnimating] = useState(true);
+  const topicData = whiteboardContent[topicId] || { 
+    title: 'Not Found', 
+    steps: [{ type: 'text', content: 'Content for this topic could not be found.' }] 
+  };
   const contentRef = useRef(null);
 
   useEffect(() => {
-    const timeouts = [];
     setDisplayedSteps([]);
-
-    let cumulativeDelay = 0;
-    topicData.steps.forEach((step) => {
-      cumulativeDelay += step.delay || 1000;
-      const stepTimeout = setTimeout(() => {
-        setDisplayedSteps(prev => [...prev, step]);
-      }, cumulativeDelay);
-      timeouts.push(stepTimeout);
-    });
-    
-    return () => {
-      timeouts.forEach(clearTimeout);
-    };
+    setCurrentStepIndex(0);
+    setIsAnimating(true);
   }, [topicId]);
+
+  const handleStepComplete = () => {
+    setIsAnimating(false);
+    if (currentStepIndex < topicData.steps.length - 1) {
+      setTimeout(() => {
+        setCurrentStepIndex(prev => prev + 1);
+        setIsAnimating(true);
+      }, 300);
+    }
+  };
+
+  useEffect(() => {
+    if (currentStepIndex < topicData.steps.length) {
+      setDisplayedSteps(prev => [...prev, topicData.steps[currentStepIndex]]);
+    }
+  }, [currentStepIndex, topicData.steps]);
 
   useEffect(() => {
     if (contentRef.current && !isMinimized) {
@@ -81,6 +151,7 @@ const Whiteboard = ({ topicId, onClose }) => {
 
   const handleMaximize = () => {
     setIsMinimized(false);
+    setIsAnimating(currentStepIndex >= displayedSteps.length - 1);
   };
 
   if (isMinimized) {
@@ -114,9 +185,14 @@ const Whiteboard = ({ topicId, onClose }) => {
           </button>
         </div>
       </header>
-      <div className="whiteboard-content" ref={contentRef}>
+      <div className="whiteboard-content" ref={contentRef} style={{ overflowY: 'auto', flex: '1' }}>
         {displayedSteps.map((step, index) => (
-          <WhiteboardStep key={index} step={step} />
+          <WhiteboardStep 
+            key={index} 
+            step={step} 
+            shouldAnimate={index === currentStepIndex && isAnimating}
+            onComplete={index === currentStepIndex ? handleStepComplete : null}
+          />
         ))}
       </div>
       <div className="whiteboard-tray"></div>
