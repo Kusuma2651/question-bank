@@ -245,6 +245,56 @@ const quizDataByTopic = {
         }
       }
     ]
+  },
+
+  // *** NEWLY ADDED QUIZ MODULES FOR PROBLEM SOLVING & LONG-FORM CONTENT ***
+  derivative_problem_solving: {
+    name: 'Solving a Derivative Problem',
+    keywords: ['solve derivative', 'product rule example'],
+    questions: [
+      { id: 1, difficulty: 'MEDIUM', question: "When differentiating f(x) = (x² + 1)sin(x), what is the term that corresponds to u'v in the product rule formula?", options: [
+        { id: 'A', text: '(x² + 1)cos(x)' },
+        { id: 'B', text: '2x * sin(x)' }
+      ], correctAnswer: 'B',
+        explanation: { answer: "In the product rule (uv)' = u'v + uv', 'u' is (x² + 1) and 'v' is sin(x). The derivative of u, u', is 2x. Therefore, the term u'v is 2x * sin(x).", keyConcepts: ['Product Rule', 'Identifying u and v', 'Basic Derivatives'], relatedTopics: ['Quotient Rule', 'Chain Rule'] }
+      }
+    ]
+  },
+  chemistry_sn2_reaction: {
+    name: 'Chemistry: SN2 Reaction',
+    keywords: ['sn2 reaction', 'nucleophilic substitution', 'chemistry derivation'],
+    questions: [
+      { id: 1, difficulty: 'MEDIUM', question: "What is a defining characteristic of an SN2 reaction mechanism?", options: [
+        { id: 'A', 'text': 'It occurs in two steps with a carbocation intermediate.' },
+        { id: 'B', 'text': 'It is a single, concerted step involving a backside attack.' }
+      ], correctAnswer: 'B',
+        explanation: { answer: "The SN2 reaction is 'bimolecular', meaning the rate-determining step involves two species (the nucleophile and the substrate). It happens in a single, concerted step where the nucleophile attacks as the leaving group leaves, causing an inversion of stereochemistry.", keyConcepts: ['SN2 Mechanism', 'Concerted Reaction', 'Backside Attack', 'Bimolecular'], relatedTopics: ['SN1 Reaction', 'Stereochemistry', 'Leaving Groups'] }
+      }
+    ]
+  },
+  physics_kinematics_problem: {
+    name: 'Physics: Kinematics Problem',
+    keywords: ['kinematics', 'free fall', 'physics problem'],
+    questions: [
+      { id: 1, difficulty: 'EASY', question: 'In the free fall problem, why can the term v₀t be ignored?', options: [
+        { id: 'A', text: 'Because the object was dropped, so its initial velocity (v₀) was zero.' },
+        { id: 'B', text: 'Because time (t) is what we are trying to find.' }
+      ], correctAnswer: 'A',
+        explanation: { answer: "The problem states the stone was 'dropped', which implies it started from rest. Therefore, its initial velocity (v₀) is 0 m/s. Anything multiplied by zero is zero, so the v₀t term in the kinematic equation becomes zero and can be ignored.", keyConcepts: ['Initial Velocity', 'Kinematic Equations', 'Free Fall Assumptions'], relatedTopics: ['Projectile Motion', 'Conservation of Energy'] }
+      }
+    ]
+  },
+  history_green_revolution: {
+    name: 'History: The Green Revolution',
+    keywords: ['green revolution', 'agriculture', 'borlaug'],
+    questions: [
+      { id: 1, difficulty: 'EASY', question: 'What was the core technological component of the Green Revolution in India?', options: [
+        { id: 'A', text: 'Introduction of high-yielding variety (HYV) seeds.' },
+        { id: 'B', text: 'Development of large-scale organic farming.' }
+      ], correctAnswer: 'A',
+        explanation: { answer: "The fundamental breakthrough of the Green Revolution was the development and widespread adoption of high-yielding varieties (HYV) of seeds, especially for wheat and rice. These seeds were designed to produce significantly more grain per hectare when supplied with adequate fertilizer and water.", keyConcepts: ['High-Yielding Varieties (HYV)', 'M.S. Swaminathan', 'Food Security'], relatedTopics: ['Indian Agriculture', 'Five-Year Plans'] }
+      }
+    ]
   }
 };
 
